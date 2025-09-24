@@ -1,0 +1,144 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+export default function Header({ searchBar = true }) {
+  const [showAbout, setShowAbout] = useState(false);
+
+  return (
+    <header className="mb-4">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/">
+            My Blogs
+          </Link>
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/category/design">
+                  Design
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/category/food">
+                  Food
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/category/games">
+                  Games
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/category/politics">
+                  Politics
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/category/decor">
+                  Decor
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/category/science">
+                  Science
+                </Link>
+              </li>
+            </ul>
+            {searchBar && (
+              <form className="d-flex me-3" role="search">
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button className="btn btn-outline-light" type="submit">
+                  Search
+                </button>
+              </form>
+            )}
+            <button
+              className="btn btn-outline-info btn-sm"
+              onClick={() => setShowAbout((s) => !s)}
+            >
+              {showAbout ? "Hide" : "About"}
+            </button>
+          </div>
+        </div>
+      </nav>
+      {showAbout && (
+        <div className="alert alert-info mt-3 container">
+           <h2 className="mb-4">About Our Blog</h2>
+
+      <p>
+        Welcome to <strong>Our Blogging Space</strong> — a hub for curious minds and
+        creative souls.
+      </p>
+
+      <p>
+        We started this blog with one simple idea: to share knowledge,
+        inspiration, and experiences that make life more exciting and meaningful.
+        Whether you’re looking for travel guides, delicious recipes, home décor
+        ideas, science facts, fitness tips, or the latest in technology and
+        gaming — you’ll find it all here.
+      </p>
+
+      <h4 className="mt-4">Our Mission</h4>
+      <p>
+        Our mission is to create a platform where readers can learn, explore,
+        and get inspired. We believe blogging is not just about writing —
+        it’s about connecting with people, exchanging ideas, and building
+        a community.
+      </p>
+
+      <h4 className="mt-4">What We Cover</h4>
+      <ul>
+        <li>Travel – stories and tips from breathtaking places.</li>
+        <li>Food – recipes and cooking inspiration.</li>
+        <li>Gaming & Technology – latest trends and insights.</li>
+        <li>Home & Lifestyle – décor ideas and healthy living.</li>
+        <li>Science & Innovation – discoveries that shape our future.</li>
+      </ul>
+
+      <h4 className="mt-4">Who We Are</h4>
+      <p>
+        We are a small team of writers and enthusiasts who love to share what
+        excites us. Each post is written with passion, creativity, and a
+        personal touch.
+      </p>
+
+      <h4 className="mt-4">Join the Journey</h4>
+      <p>
+        We’d love for you to be a part of our blogging family. Explore our posts,
+        leave your comments, and share your own experiences with us.
+      </p>
+
+      <p>
+        Together, let’s learn, grow, and inspire each other.
+      </p>
+        </div>
+      )}
+            <Link className="btn btn-primary me-2" to="/create">
+              + Create Post
+            </Link>
+    </header>
+  );
+}
