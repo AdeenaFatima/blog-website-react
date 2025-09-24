@@ -1,0 +1,78 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export default function Createpost({ onCreate }) {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!title.trim() || !author.trim() || !content.trim()) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    const newPost = {
+      title,
+      author,
+      content,
+    };
+
+    onCreate(newPost);
+
+    setTitle("");
+    setAuthor("");
+    setContent("");
+    navigate("/");
+  };
+
+  return (
+    <div className="card mt-3">
+      <div className="card-body">
+        <h3 className="card-title">Create New Post</h3>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter post title"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Author</label>
+            <input
+              type="text"
+              className="form-control"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              placeholder="Your name"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Content</label>
+            <textarea
+              className="form-control"
+              rows="5"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Write your post here..."
+            ></textarea>
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Create Post
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
