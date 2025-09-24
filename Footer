@@ -1,0 +1,21 @@
+import React from "react";
+
+const Footer = () => {
+  return (
+    <footer className="bg-dark text-light text-center py-3 mt-4">
+      <div className="container">
+        <p className="mb-1">&copy; {new Date().getFullYear()} My Blog App</p>
+        <p className="mb-0">
+          <a href="/" className="text-light text-decoration-none me-3">
+            Home
+          </a>
+          <a href="/create" className="text-light text-decoration-none">
+            Create Post
+          </a>
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
