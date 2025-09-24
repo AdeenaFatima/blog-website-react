@@ -1,0 +1,54 @@
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+
+export default function BlogPost({ posts, onDelete }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const post = posts.find((p) => p.id === id);
+
+  if (!post) {
+    return (
+      <div className="alert alert-danger mt-3">
+        <h4>Post not found</h4>
+        <button
+          className="btn btn-secondary mt-2"
+          onClick={() => navigate(-1)}
+        >
+          Go back
+        </button>
+      </div>
+    );
+  }
+
+  const handleDelete = () => {
+    if (window.confirm('Delete this post?')) {
+      onDelete(post.id);
+      navigate('/');
+    }
+  };
+
+  return (
+    <article className="card mt-3">
+      <div className="card-body">
+        <h3 className="card-title">{post.title}</h3>
+        <h6 className="card-subtitle mb-2 text-muted">
+          By {post.author} — {post.createdAt}
+        </h6>
+        <p className="card-text">{post.content}</p>
+        <button
+          className="btn btn-secondary me-2"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
+    </article>
+  );
+}
